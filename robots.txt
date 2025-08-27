@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rayaneyounes107-cyber.github.io/bac2026/sitemap.xml
+ 
