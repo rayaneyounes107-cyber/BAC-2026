@@ -1,12 +1,12 @@
-# 🎓 Compte à Rebours Bac 2026 - Algérie 🇩🇿
+# 🎓 Compte à Rebours Bac 2027 - Algérie 🇩🇿
 
-⏳ **Un site web simple et utile pour suivre le temps restant avant le Bac Algérie 2026.**  
+⏳ **Un site web simple et utile pour suivre le temps restant avant le Bac Algérie 2027.**  
 📅 Il affiche en direct le **nombre de jours, heures, minutes et secondes** avant le début des épreuves.
 
 ---
 
 ## 🌍 Fonctionnalités
-- ✅ **Multilingue** : Français 🇫🇷 / عربي 🇩🇿
+- ✅ **Multilingue** : Français 🇫🇷 / عربي 🇩🇿 / English ENG
 - ✅ **Affichage en temps réel** du compte à rebours
 - ✅ **Design moderne** avec les couleurs du drapeau algérien
 - ✅ **Lien vers un serveur Discord** pour s’entraider et réviser ensemble
@@ -23,7 +23,7 @@ Ce projet est un **compte à rebours interactif pour le Bac Algérie 2026**.
 Il aide les lycéens à **se préparer et gérer leur temps** jusqu’au jour J.
 
 **Mots-clés (SEO) :**  
-- Bac 2026 Algérie  
+- Bac 2027 Algérie  
 - Compte à rebours Bac DZ  
 - DzBac 2026 countdown  
 - Bac examen date Algérie  
@@ -37,10 +37,10 @@ Il aide les lycéens à **se préparer et gérer leur temps** jusqu’au jour J.
 يساعد التلاميذ على **معرفة الوقت المتبقي** بدقة حتى موعد الامتحان.
 
 **كلمات مفتاحية (SEO) :**  
-- العد التنازلي لبكالوريا الجزائر 2026  
+- العد التنازلي لبكالوريا الجزائر 2027
 - موعد بكالوريا الجزائر  
 - وقت الباك  
-- DzBac 2026  
+- DzBac 2027  
 - Bac Algérie countdown  
 
 ---
