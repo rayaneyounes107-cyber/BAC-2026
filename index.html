@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">العد التنازلي لبكالوريا 2026</title>
-    <meta name="description" id="meta-desc" content="موقع لعرض العد التنازلي لبكالوريا الجزائر 2026. يساعد التلاميذ على معرفة الوقت المتبقي.">
+    <title id="page-title">العد التنازلي لبكالوريا 2027</title>
+    <meta name="description" id="meta-desc" content="موقع لعرض العد التنازلي لبكالوريا الجزائر 2027. يساعد التلاميذ على معرفة الوقت المتبقي.">
     <!-- Favicon 🎓 -->
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
             right: 20px;
             z-index: 100;
             display: flex;
-            gap: 10px;
+            gap: 15px;
         }
 
         html[dir="ltr"] .lang-switcher {
@@ -58,21 +58,25 @@
         .lang-btn {
             background: rgba(255, 255, 255, 0.2);
             color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 8px 15px;
-            border-radius: 20px;
+            border: 2px solid transparent;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             cursor: pointer;
-            font-weight: bold;
+            font-size: 1.8rem;
             transition: all 0.3s;
             backdrop-filter: blur(5px);
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 5px;
+            padding: 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .lang-btn:hover, .lang-btn.active {
-            background: var(--accent);
+            background: rgba(255, 255, 255, 0.4);
             border-color: var(--accent);
+            transform: scale(1.1);
         }
 
         .container {
@@ -326,14 +330,16 @@
             #message { font-size: 1.2rem; }
             .dz-flag-top { width: 50px; height: 30px; top: 15px; }
             .container { padding-top: 6rem; }
+            .lang-switcher { gap: 10px; }
+            .lang-btn { width: 40px; height: 40px; font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
     <div class="lang-switcher">
-        <button class="lang-btn active" onclick="changeLanguage('ar')" id="btn-ar">🇩🇿 العربية</button>
-        <button class="lang-btn" onclick="changeLanguage('fr')" id="btn-fr">🇫🇷 Français</button>
-        <button class="lang-btn" onclick="changeLanguage('en')" id="btn-en">🇬🇧 English</button>
+        <button class="lang-btn active" onclick="changeLanguage('ar')" id="btn-ar" title="العربية">🇩🇿</button>
+        <button class="lang-btn" onclick="changeLanguage('fr')" id="btn-fr" title="Français">🇫🇷</button>
+        <button class="lang-btn" onclick="changeLanguage('en')" id="btn-en" title="English">🇬🇧</button>
     </div>
 
     <div class="dz-flag-top"></div>
@@ -343,7 +349,7 @@
         <header>
             <div class="logo">
                 <i class="fas fa-graduation-cap logo-icon"></i>
-                <h1 id="ui-title">العد التنازلي لبكالوريا 2026</h1>
+                <h1 id="ui-title">العد التنازلي لبكالوريا 2027</h1>
             </div>
             <p class="subtitle" id="ui-subtitle">استعد لأهم اختبار في مسيرتك التعليمية، كل ثانية تمر تقربك من تحقيق حلمك</p>
         </header>
@@ -371,9 +377,9 @@
                 <div class="progress-bar" id="progress-bar"></div>
             </div>
             <div class="progress-info">
-                <span id="ui-start-date">21 سبتمبر 2025</span>
+                <span id="ui-start-date">06 سبتمبر 2026</span>
                 <span id="progress-percentage">0%</span>
-                <span id="ui-end-date">15 يونيو 2026</span>
+                <span id="ui-end-date">07 يونيو 2027</span>
             </div>
         </div>
 
@@ -395,9 +401,9 @@
         const i18n = {
             ar: {
                 dir: "rtl",
-                pageTitle: "العد التنازلي لبكالوريا 2026",
-                metaDesc: "موقع لعرض العد التنازلي لبكالوريا الجزائر 2026. يساعد التلاميذ على معرفة الوقت المتبقي.",
-                uiTitle: "العد التنازلي لبكالوريا 2026",
+                pageTitle: "العد التنازلي لبكالوريا 2027",
+                metaDesc: "موقع لعرض العد التنازلي لبكالوريا الجزائر 2027. يساعد التلاميذ على معرفة الوقت المتبقي.",
+                uiTitle: "العد التنازلي لبكالوريا 2027",
                 uiSubtitle: "استعد لأهم اختبار في مسيرتك التعليمية، كل ثانية تمر تقربك من تحقيق حلمك",
                 thWeeks: "أسابيع",
                 thDays: "أيام",
@@ -405,8 +411,8 @@
                 thMinutes: "دقائق",
                 thSeconds: "ثواني",
                 uiProgressTitle: "التقدم نحو البكالوريا",
-                uiStartDate: "21 سبتمبر 2025",
-                uiEndDate: "15 يونيو 2026",
+                uiStartDate: "06 سبتمبر 2026",
+                uiEndDate: "07 يونيو 2027",
                 uiDiscordBtn: '<i class="fab fa-discord"></i> انضم إلى خادمنا',
                 msgDone: "مبروك! لقد وصلت إلى البكالوريا!",
                 messages: [
@@ -432,9 +438,9 @@
             },
             fr: {
                 dir: "ltr",
-                pageTitle: "Compte à Rebours Bac 2026",
-                metaDesc: "Un site web simple et utile pour suivre le temps restant avant le Bac Algérie 2026.",
-                uiTitle: "Compte à Rebours Bac 2026",
+                pageTitle: "Compte à Rebours Bac 2027",
+                metaDesc: "Un site web simple et utile pour suivre le temps restant avant le Bac Algérie 2027.",
+                uiTitle: "Compte à Rebours Bac 2027",
                 uiSubtitle: "Préparez-vous pour l'examen le plus important, chaque seconde vous rapproche de votre rêve",
                 thWeeks: "Semaines",
                 thDays: "Jours",
@@ -442,8 +448,8 @@
                 thMinutes: "Minutes",
                 thSeconds: "Secondes",
                 uiProgressTitle: "Progression vers le Bac",
-                uiStartDate: "21 Septembre 2025",
-                uiEndDate: "15 Juin 2026",
+                uiStartDate: "06 Septembre 2026",
+                uiEndDate: "07 Juin 2027",
                 uiDiscordBtn: '<i class="fab fa-discord"></i> Rejoignez notre serveur',
                 msgDone: "Félicitations ! Vous avez atteint le Bac !",
                 messages: [
@@ -469,9 +475,9 @@
             },
             en: {
                 dir: "ltr",
-                pageTitle: "Bac 2026 Countdown",
-                metaDesc: "A simple and useful website to track the remaining time before the 2026 Algerian Baccalaureate.",
-                uiTitle: "Bac 2026 Countdown",
+                pageTitle: "Bac 2027 Countdown",
+                metaDesc: "A simple and useful website to track the remaining time before the 2027 Algerian Baccalaureate.",
+                uiTitle: "Bac 2027 Countdown",
                 uiSubtitle: "Prepare for the most important exam, every second brings you closer to your dream",
                 thWeeks: "Weeks",
                 thDays: "Days",
@@ -479,8 +485,8 @@
                 thMinutes: "Minutes",
                 thSeconds: "Seconds",
                 uiProgressTitle: "Progress towards the Bac",
-                uiStartDate: "September 21, 2025",
-                uiEndDate: "June 15, 2026",
+                uiStartDate: "September 06, 2026",
+                uiEndDate: "June 07, 2027",
                 uiDiscordBtn: '<i class="fab fa-discord"></i> Join our server',
                 msgDone: "Congratulations! You have reached the Baccalaureate!",
                 messages: [
@@ -508,8 +514,9 @@
 
         let currentLang = 'ar';
 
-        const targetDate = new Date("2026-06-15T08:00:00").getTime();
-        const startDate = new Date("2025-09-21T00:00:00").getTime();
+        // Nouvelles dates (Bac 2027)
+        const targetDate = new Date("2027-06-07T08:00:00").getTime();
+        const startDate = new Date("2026-09-06T00:00:00").getTime();
 
         const weeksEl = document.getElementById("weeks");
         const daysEl = document.getElementById("days");
@@ -630,5 +637,3 @@
     </script>
 </body>
 </html>
-
-
