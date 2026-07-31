@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>العد التنازلي لبكالوريا 2026</title>
+    <title id="page-title">العد التنازلي لبكالوريا 2026</title>
+    <meta name="description" id="meta-desc" content="موقع لعرض العد التنازلي لبكالوريا الجزائر 2026. يساعد التلاميذ على معرفة الوقت المتبقي.">
     <!-- Favicon 🎓 -->
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
@@ -34,18 +35,58 @@
             position: relative;
         }
 
+        /* Switcher de langue */
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+
+        html[dir="ltr"] .lang-switcher {
+            right: 20px;
+            left: auto;
+        }
+        
+        html[dir="rtl"] .lang-switcher {
+            left: 20px;
+            right: auto;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
             position: relative;
             z-index: 20;
+            padding-top: 5rem;
         }
 
         header {
             text-align: center;
             margin-bottom: 2rem;
-            padding-top: 1rem;
             animation: fadeIn 1.5s ease-out;
         }
 
@@ -59,7 +100,7 @@
         .logo-icon {
             font-size: 2.5rem;
             color: var(--accent);
-            margin-left: 1rem;
+            margin: 0 1rem;
             animation: pulse 2s infinite;
         }
 
@@ -188,17 +229,26 @@
             opacity: 0.8;
         }
 
-        /* العلم الجزائري أعلى يسار */
+        /* العلم الجزائري أعلى يسار (RTL) أو يمين (LTR) */
         .dz-flag-top {
             position: fixed;
             top: 20px;
-            left: 20px;
             width: 70px;
             height: 45px;
             background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Flag_of_Algeria.svg/1280px-Flag_of_Algeria.svg.png') no-repeat center/cover;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
             z-index: 100;
+        }
+
+        html[dir="rtl"] .dz-flag-top {
+            right: 20px;
+            left: auto;
+        }
+
+        html[dir="ltr"] .dz-flag-top {
+            left: 20px;
+            right: auto;
         }
 
         .particles-container {
@@ -246,10 +296,6 @@
             transform: translateY(-3px);
         }
 
-        .discord-button i {
-            font-size: 1.5rem;
-        }
-
         @keyframes float {
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
@@ -278,11 +324,18 @@
             .countdown-table th { font-size: 1rem; }
             .countdown-table td { font-size: 1.4rem; }
             #message { font-size: 1.2rem; }
-            .dz-flag-top { width: 50px; height: 30px; top: 15px; left: 15px; }
+            .dz-flag-top { width: 50px; height: 30px; top: 15px; }
+            .container { padding-top: 6rem; }
         }
     </style>
 </head>
 <body>
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="changeLanguage('ar')" id="btn-ar">🇩🇿 العربية</button>
+        <button class="lang-btn" onclick="changeLanguage('fr')" id="btn-fr">🇫🇷 Français</button>
+        <button class="lang-btn" onclick="changeLanguage('en')" id="btn-en">🇬🇧 English</button>
+    </div>
+
     <div class="dz-flag-top"></div>
     <div class="particles-container" id="particles"></div>
 
@@ -290,18 +343,18 @@
         <header>
             <div class="logo">
                 <i class="fas fa-graduation-cap logo-icon"></i>
-                <h1>العد التنازلي لبكالوريا 2026</h1>
+                <h1 id="ui-title">العد التنازلي لبكالوريا 2026</h1>
             </div>
-            <p class="subtitle">استعد لأهم اختبار في مسيرتك التعليمية، كل ثانية تمر تقربك من تحقيق حلمك</p>
+            <p class="subtitle" id="ui-subtitle">استعد لأهم اختبار في مسيرتك التعليمية، كل ثانية تمر تقربك من تحقيق حلمك</p>
         </header>
 
         <table class="countdown-table">
             <tr>
-                <th>أسابيع</th>
-                <th>أيام</th>
-                <th>ساعات</th>
-                <th>دقائق</th>
-                <th>ثواني</th>
+                <th id="th-weeks">أسابيع</th>
+                <th id="th-days">أيام</th>
+                <th id="th-hours">ساعات</th>
+                <th id="th-minutes">دقائق</th>
+                <th id="th-seconds">ثواني</th>
             </tr>
             <tr>
                 <td id="weeks">0</td>
@@ -313,31 +366,148 @@
         </table>
 
         <div class="progress-section">
-            <h3 class="progress-title">التقدم نحو البكالوريا</h3>
+            <h3 class="progress-title" id="ui-progress-title">التقدم نحو البكالوريا</h3>
             <div class="progress-container">
                 <div class="progress-bar" id="progress-bar"></div>
             </div>
             <div class="progress-info">
-                <span>21 سبتمبر 2025</span>
+                <span id="ui-start-date">21 سبتمبر 2025</span>
                 <span id="progress-percentage">0%</span>
-                <span>15 يونيو 2026</span>
+                <span id="ui-end-date">15 يونيو 2026</span>
             </div>
         </div>
 
         <div class="message-container">
-            <p id="message">استمر في العمل، النجاح قريب!</p>
-            <p id="quote">"النجاح هو مجموع الجهود الصغيرة التي تتكرر يومياً"</p>
+            <p id="message"></p>
+            <p id="quote"></p>
         </div>
 
         <!-- Bouton Discord -->
         <div class="discord-button">
-            <a href="https://discord.gg/tZs4auXv" target="_blank">
+            <a href="https://discord.gg/tZs4auXv" target="_blank" id="ui-discord-btn">
                 <i class="fab fa-discord"></i> انضم إلى خادمنا
             </a>
         </div>
     </div>
 
     <script>
+        // Base de données de traduction
+        const i18n = {
+            ar: {
+                dir: "rtl",
+                pageTitle: "العد التنازلي لبكالوريا 2026",
+                metaDesc: "موقع لعرض العد التنازلي لبكالوريا الجزائر 2026. يساعد التلاميذ على معرفة الوقت المتبقي.",
+                uiTitle: "العد التنازلي لبكالوريا 2026",
+                uiSubtitle: "استعد لأهم اختبار في مسيرتك التعليمية، كل ثانية تمر تقربك من تحقيق حلمك",
+                thWeeks: "أسابيع",
+                thDays: "أيام",
+                thHours: "ساعات",
+                thMinutes: "دقائق",
+                thSeconds: "ثواني",
+                uiProgressTitle: "التقدم نحو البكالوريا",
+                uiStartDate: "21 سبتمبر 2025",
+                uiEndDate: "15 يونيو 2026",
+                uiDiscordBtn: '<i class="fab fa-discord"></i> انضم إلى خادمنا',
+                msgDone: "مبروك! لقد وصلت إلى البكالوريا!",
+                messages: [
+                    "استمر في العمل، النجاح قريب!",
+                    "كل يوم يقترب بك من هدفك!",
+                    "حافظ على تركيزك، البكالوريا تقترب!",
+                    "جهز نفسك وتأكد من التميز!",
+                    "ثقتك بنفسك هي مفتاح نجاحك!",
+                    "الاستعداد اليوم يعني النجاح غداً!",
+                    "لا تؤجل ما يمكنك فعله اليوم!",
+                    "كل ثانية تحسب! اصنع فرقاً الآن!"
+                ],
+                quotes: [
+                    "النجاح هو مجموع الجهود الصغيرة التي تتكرر يومياً",
+                    "ليس هناك من هو أكثر بؤساً من المرء الذي أصبح اللاقرار عادته",
+                    "الطموح اللامحدود هو وقود الإنجاز",
+                    "الاستعداد للامتحانات يعلمك أكثر من الامتحان نفسه",
+                    "لا يوجد مصعد للنجاح، يجب أن تستخدم الدرج",
+                    "النجاح ليس صدفة، إنه عمل شاق ومثابرة وتعلم",
+                    "أفضل طريقة للتنبؤ بالمستقبل هي صنعه",
+                    "التعليم هو أقوى سلاح يمكنك استخدامه لتغيير العالم"
+                ]
+            },
+            fr: {
+                dir: "ltr",
+                pageTitle: "Compte à Rebours Bac 2026",
+                metaDesc: "Un site web simple et utile pour suivre le temps restant avant le Bac Algérie 2026.",
+                uiTitle: "Compte à Rebours Bac 2026",
+                uiSubtitle: "Préparez-vous pour l'examen le plus important, chaque seconde vous rapproche de votre rêve",
+                thWeeks: "Semaines",
+                thDays: "Jours",
+                thHours: "Heures",
+                thMinutes: "Minutes",
+                thSeconds: "Secondes",
+                uiProgressTitle: "Progression vers le Bac",
+                uiStartDate: "21 Septembre 2025",
+                uiEndDate: "15 Juin 2026",
+                uiDiscordBtn: '<i class="fab fa-discord"></i> Rejoignez notre serveur',
+                msgDone: "Félicitations ! Vous avez atteint le Bac !",
+                messages: [
+                    "Continuez à travailler, le succès est proche !",
+                    "Chaque jour vous rapproche de votre objectif !",
+                    "Restez concentré, le Bac approche !",
+                    "Préparez-vous et assurez l'excellence !",
+                    "La confiance en soi est la clé de la réussite !",
+                    "Se préparer aujourd'hui, c'est réussir demain !",
+                    "Ne remettez pas à demain ce que vous pouvez faire aujourd'hui !",
+                    "Chaque seconde compte ! Faites la différence maintenant !"
+                ],
+                quotes: [
+                    "Le succès est la somme de petits efforts répétés jour après jour.",
+                    "Il n'y a rien de plus misérable qu'une personne dont l'indécision est devenue une habitude.",
+                    "Une ambition illimitée est le carburant de la réussite.",
+                    "Se préparer aux examens vous apprend plus que l'examen lui-même.",
+                    "Il n'y a pas d'ascenseur pour le succès, il faut prendre les escaliers.",
+                    "Le succès n'est pas un accident, c'est du travail acharné, de la persévérance et de l'apprentissage.",
+                    "La meilleure façon de prédire l'avenir est de le créer.",
+                    "L'éducation est l'arme la plus puissante que l'on puisse utiliser pour changer le monde."
+                ]
+            },
+            en: {
+                dir: "ltr",
+                pageTitle: "Bac 2026 Countdown",
+                metaDesc: "A simple and useful website to track the remaining time before the 2026 Algerian Baccalaureate.",
+                uiTitle: "Bac 2026 Countdown",
+                uiSubtitle: "Prepare for the most important exam, every second brings you closer to your dream",
+                thWeeks: "Weeks",
+                thDays: "Days",
+                thHours: "Hours",
+                thMinutes: "Minutes",
+                thSeconds: "Seconds",
+                uiProgressTitle: "Progress towards the Bac",
+                uiStartDate: "September 21, 2025",
+                uiEndDate: "June 15, 2026",
+                uiDiscordBtn: '<i class="fab fa-discord"></i> Join our server',
+                msgDone: "Congratulations! You have reached the Baccalaureate!",
+                messages: [
+                    "Keep working, success is near!",
+                    "Every day brings you closer to your goal!",
+                    "Stay focused, the Bac is approaching!",
+                    "Prepare yourself and ensure excellence!",
+                    "Self-confidence is the key to success!",
+                    "Preparing today means succeeding tomorrow!",
+                    "Don't put off until tomorrow what you can do today!",
+                    "Every second counts! Make a difference now!"
+                ],
+                quotes: [
+                    "Success is the sum of small efforts, repeated day in and day out.",
+                    "There is no one more miserable than a person whose indecision has become a habit.",
+                    "Limitless ambition is the fuel of achievement.",
+                    "Preparing for exams teaches you more than the exam itself.",
+                    "There is no elevator to success, you have to take the stairs.",
+                    "Success is no accident. It is hard work, perseverance, learning, and studying.",
+                    "The best way to predict the future is to create it.",
+                    "Education is the most powerful weapon which you can use to change the world."
+                ]
+            }
+        };
+
+        let currentLang = 'ar';
+
         const targetDate = new Date("2026-06-15T08:00:00").getTime();
         const startDate = new Date("2025-09-21T00:00:00").getTime();
 
@@ -351,27 +521,38 @@
         const messageEl = document.getElementById("message");
         const quoteEl = document.getElementById("quote");
 
-        const messages = [
-            "استمر في العمل، النجاح قريب!",
-            "كل يوم يقترب بك من هدفك!",
-            "حافظ على تركيزك، البكالوريا تقترب!",
-            "جهز نفسك وتأكد من التميز!",
-            "ثقتك بنفسك هي مفتاح نجاحك!",
-            "الاستعداد اليوم يعني النجاح غداً!",
-            "لا تؤجل ما يمكنك فعله اليوم!",
-            "كل ثانية تحسب! اصنع فرقاً الآن!"
-        ];
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const data = i18n[lang];
 
-        const quotes = [
-            "النجاح هو مجموع الجهود الصغيرة التي تتكرر يومياً",
-            "ليس هناك من هو أكثر بؤساً من المرء الذي أصبح اللاقرار عادته",
-            "الطموح اللامحدود هو وقود الإنجاز",
-            "الاستعداد للامتحانات يعلمك أكثر من الامتحان نفسه",
-            "لا يوجد مصعد للنجاح، يجب أن تستخدم الدرج",
-            "النجاح ليس صدفة، إنه عمل شاق ومثابرة وتعلم",
-            "أفضل طريقة للتنبؤ بالمستقبل هي صنعه",
-            "التعليم هو أقوى سلاح يمكنك استخدامه لتغيير العالم"
-        ];
+            // Mettre à jour la direction et l'attribut lang
+            document.documentElement.dir = data.dir;
+            document.documentElement.lang = lang;
+
+            // Mettre à jour le SEO
+            document.getElementById("page-title").innerText = data.pageTitle;
+            document.getElementById("meta-desc").setAttribute("content", data.metaDesc);
+
+            // Mettre à jour l'interface utilisateur statique
+            document.getElementById("ui-title").innerText = data.uiTitle;
+            document.getElementById("ui-subtitle").innerText = data.uiSubtitle;
+            document.getElementById("th-weeks").innerText = data.thWeeks;
+            document.getElementById("th-days").innerText = data.thDays;
+            document.getElementById("th-hours").innerText = data.thHours;
+            document.getElementById("th-minutes").innerText = data.thMinutes;
+            document.getElementById("th-seconds").innerText = data.thSeconds;
+            document.getElementById("ui-progress-title").innerText = data.uiProgressTitle;
+            document.getElementById("ui-start-date").innerText = data.uiStartDate;
+            document.getElementById("ui-end-date").innerText = data.uiEndDate;
+            document.getElementById("ui-discord-btn").innerHTML = data.uiDiscordBtn;
+
+            // Mettre à jour l'état actif des boutons
+            document.querySelectorAll(".lang-btn").forEach(btn => btn.classList.remove("active"));
+            document.getElementById("btn-" + lang).classList.add("active");
+
+            // Forcer la mise à jour immédiate des messages
+            updateMessages();
+        }
 
         function createParticles() {
             const container = document.getElementById('particles');
@@ -391,9 +572,16 @@
             }
         }
 
+        function updateMessages() {
+            const data = i18n[currentLang];
+            messageEl.textContent = data.messages[Math.floor(Math.random() * data.messages.length)];
+            quoteEl.textContent = `"${data.quotes[Math.floor(Math.random() * data.quotes.length)]}"`;
+        }
+
         function updateCountdown() {
             const now = new Date().getTime();
             const diff = targetDate - now;
+            const data = i18n[currentLang];
 
             if (diff < 0) {
                 weeksEl.textContent = "00";
@@ -401,7 +589,8 @@
                 hoursEl.textContent = "00";
                 minutesEl.textContent = "00";
                 secondsEl.textContent = "00";
-                messageEl.textContent = "مبروك! لقد وصلت إلى البكالوريا!";
+                messageEl.textContent = data.msgDone;
+                quoteEl.textContent = "";
                 progressBarEl.style.width = "100%";
                 progressPercentageEl.textContent = "100%";
                 return;
@@ -426,14 +615,17 @@
             progressBarEl.style.width = `${progressPercent}%`;
             progressPercentageEl.textContent = `${progressPercent.toFixed(1)}%`;
 
+            // Mettre à jour la citation toutes les 15 secondes
             if (seconds % 15 === 0) {
-                messageEl.textContent = messages[Math.floor(Math.random() * messages.length)];
-                quoteEl.textContent = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
+                updateMessages();
             }
         }
 
+        // Initialisation par défaut (Arabe)
+        changeLanguage('ar');
         setInterval(updateCountdown, 1000);
         updateCountdown();
+        updateMessages();
         createParticles();
     </script>
 </body>
