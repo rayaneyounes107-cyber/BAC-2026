@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap du site
-Sitemap: https://rayaneyounes107-cyber.github.io/BAC-2026/sitemap_index.xml
+Sitemap: https://rayaneyounes107-cyber.github.io/BAC-2027/sitemap_index.xml
