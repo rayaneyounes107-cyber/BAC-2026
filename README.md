@@ -19,13 +19,13 @@
 ---
 
 ## 📖 Description (FR)
-Ce projet est un **compte à rebours interactif pour le Bac Algérie 2026**.  
+Ce projet est un **compte à rebours interactif pour le Bac Algérie 2027**.  
 Il aide les lycéens à **se préparer et gérer leur temps** jusqu’au jour J.
 
 **Mots-clés (SEO) :**  
 - Bac 2027 Algérie  
 - Compte à rebours Bac DZ  
-- DzBac 2026 countdown  
+- DzBac 2027 countdown  
 - Bac examen date Algérie  
 - Bac secondaire DZ  
 - Temps restant Bac Algérie  
@@ -33,7 +33,7 @@ Il aide les lycéens à **se préparer et gérer leur temps** jusqu’au jour J.
 ---
 
 ## 📖 الوصف (AR)
-هذا المشروع عبارة عن **موقع لعرض العد التنازلي لبكالوريا الجزائر 2026**.  
+هذا المشروع عبارة عن **موقع لعرض العد التنازلي لبكالوريا الجزائر 2027**  
 يساعد التلاميذ على **معرفة الوقت المتبقي** بدقة حتى موعد الامتحان.
 
 **كلمات مفتاحية (SEO) :**  
