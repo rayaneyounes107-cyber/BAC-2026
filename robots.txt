@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rayaneyounes107-cyber.github.io/BAC-2027/sitemap.xml
+Sitemap: https://rayaneyounes107-cyber.github.io/sitemap.xml
