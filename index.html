@@ -298,6 +298,22 @@
   .pomodoro-controls .btn-start{background:var(--green);color:#fff;}
   .pomodoro-controls .btn-reset{background:transparent;border:1px solid var(--border);color:var(--muted);}
   .pomodoro-sessions-row{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted);}
+  .pomodoro-focus-btn{width:100%;margin-top:.9rem;background:transparent;border:1px solid var(--border);color:var(--muted);font-weight:600;font-size:.8rem;padding:.6rem;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s;}
+  .pomodoro-focus-btn:hover{border-color:var(--green);color:var(--green);}
+
+  /* Mode focus plein écran */
+  .focus-overlay{position:fixed;inset:0;background:var(--bg);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.6rem;text-align:center;}
+  .focus-overlay.open{display:flex;}
+  .focus-exit{position:absolute;top:24px;inset-inline-end:24px;background:var(--card);border:1px solid var(--border);color:var(--muted);padding:.6rem 1.1rem;border-radius:999px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;gap:8px;}
+  .focus-exit:hover{color:var(--text);border-color:var(--green);}
+  .focus-phase{font-size:1.1rem;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:.1em;}
+  .focus-time{font-family:'Cairo',sans-serif;font-size:7rem;font-weight:800;color:var(--text);line-height:1;}
+  .focus-controls{display:flex;gap:1rem;}
+  .focus-controls button{padding:.8rem 2rem;border-radius:12px;font-weight:700;font-size:1rem;cursor:pointer;border:none;}
+  .focus-controls .btn-start{background:var(--green);color:#fff;}
+  .focus-controls .btn-reset{background:transparent;border:1px solid var(--border);color:var(--muted);}
+  .focus-sessions{font-size:.9rem;color:var(--muted);}
+  @media (max-width:640px){ .focus-time{font-size:4.5rem;} }
  
   /* Que dois-je faire / Planning */
   .whattodo-btn-big{width:100%;background:linear-gradient(135deg,var(--green),#136b39);border:none;color:#fff;font-weight:700;font-size:.95rem;padding:.9rem;border-radius:12px;cursor:pointer;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 16px rgba(31,138,76,0.25);transition:.2s;}
@@ -338,13 +354,30 @@
   .plan-segment.rest{background:transparent;border:1px dashed var(--border);color:var(--muted);font-style:italic;}
   .plan-segment.blocked{background:var(--red-soft);border:1px solid var(--red);color:var(--muted);}
   .plan-tip{font-size:.78rem;color:var(--muted);line-height:1.7;margin-top:1rem;padding:.8rem 1rem;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;}
+  .orientation-card{border-top:3px solid var(--green);}
+  .orientation-intro{font-size:.85rem;color:var(--muted);line-height:1.8;margin-bottom:1.1rem;}
+  .orientation-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.7rem;margin-bottom:1.2rem;}
+  .orientation-step{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:.9rem;}
+  .orientation-step .os-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:var(--green);color:#fff;border-radius:50%;font-size:.75rem;font-weight:800;margin-bottom:.5rem;}
+  .orientation-step .os-text{font-size:.8rem;line-height:1.6;}
+  .orientation-links{display:flex;flex-wrap:wrap;gap:.7rem;margin-bottom:1rem;}
+  .orientation-disclaimer{font-size:.76rem;color:var(--red);background:var(--red-soft);border:1px solid var(--red);border-radius:10px;padding:.7rem 1rem;line-height:1.7;}
   .plan-pdf-btn{width:100%;margin-top:1rem;background:transparent;border:1.5px solid var(--green);color:var(--text);font-weight:700;font-size:.88rem;padding:.75rem;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s;}
   .plan-pdf-btn:hover{background:var(--green);color:#fff;}
   .plan-pdf-btn:disabled{opacity:.6;cursor:wait;}
   .plan-pdf-status{text-align:center;font-size:.75rem;color:var(--muted);margin-top:.5rem;}
+  .plan-export-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;}
+  .plan-export-row .plan-pdf-btn{margin-top:1rem;}
+  @media (max-width:520px){ .plan-export-row{grid-template-columns:1fr;} }
  
   /* ---------- TABLEAU ---------- */
   .empty-state.tableau{padding:3rem 1.5rem;}
+  .checklist-box{display:flex;flex-direction:column;gap:.6rem;}
+  .checklist-item{display:flex;align-items:center;gap:.8rem;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.1rem;cursor:pointer;transition:.2s;}
+  .checklist-item:hover{border-color:var(--green);}
+  .checklist-item input{width:20px;height:20px;accent-color:var(--green);cursor:pointer;flex-shrink:0;}
+  .checklist-item span{font-size:.9rem;}
+  .checklist-item.checked span{color:var(--muted);text-decoration:line-through;}
  
   /* ---------- CHAT WIDGET ---------- */
   .chat-fab{position:fixed;bottom:22px;z-index:250;width:56px;height:56px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.4);transition:.2s;}
@@ -501,6 +534,9 @@
             <button class="btn-reset" id="pomodoro-reset-btn" onclick="resetPomodoro()">إعادة تعيين</button>
           </div>
           <div class="pomodoro-sessions-row"><span id="pomodoro-sessions-label">جلسات مكتملة</span><span id="pomodoro-sessions-count">0</span></div>
+          <button class="pomodoro-focus-btn" id="pomodoro-focus-btn" onclick="openFocusMode()">
+            <i class="fas fa-expand"></i> <span id="pomodoro-focus-btn-text">وضع التركيز بملء الشاشة</span>
+          </button>
         </div>
 
         <!-- Que dois-je faire ? -->
@@ -546,6 +582,21 @@
           <div id="plan-result"></div>
         </div>
 
+        <!-- Orientation post-bac -->
+        <div class="tool-card orientation-card" style="grid-column:1/-1;">
+          <div class="tool-card-title" id="orientation-title">🎓 التوجيه الجامعي بعد البكالوريا</div>
+          <p class="orientation-intro" id="orientation-intro">
+            التوجيه الجامعي يعتمد على 4 معايير: شعبتك، معدلك (العام أو المرجح حسب الشعبة)، رغباتك المدونة في استمارة التسجيل، والطاقة الاستيعابية للمؤسسات. العتبات الدنيا لكل تخصص تتغير كل سنة حسب عدد الناجحين والطلب، ولا يتم تحديدها إلا بعد صدور نتائج البكالوريا.
+          </p>
+          <div class="orientation-steps" id="orientation-steps"></div>
+          <div class="orientation-links">
+            <a href="https://www.orientation-esi.dz/" target="_blank" class="cta-btn primary"><i class="fas fa-arrow-up-right-from-square"></i> <span id="orientation-link1">المنصة الرسمية للتسجيل والتوجيه</span></a>
+            <a href="https://rag.mesrs.dz/" target="_blank" class="cta-btn ghost"><i class="fas fa-robot"></i> <span id="orientation-link2">المساعد الذكي الرسمي للتوجيه</span></a>
+          </div>
+          <p class="orientation-disclaimer" id="orientation-disclaimer">
+            ⚠️ هذا القسم إعلامي فقط، لا يحسب أي عتبات قبول. تحقق دائماً من المنصة الرسمية أعلاه للمعلومات الدقيقة والمحدثة.
+          </p>
+        </div>
 
       </div>
 
@@ -640,10 +691,25 @@
         <i class="fas fa-calendar-xmark"></i>
         <span id="tableau-empty-text">لا يوجد بعد جدول زمني رسمي لامتحانات بكالوريا 2027. سيتم نشره من طرف الديوان الوطني للامتحانات والمسابقات عادةً في شهر مارس السابق للامتحان.</span>
       </div>
+
+      <h3 class="guide-subtitle" id="checklist-title">✅ قائمة التحقق ليوم الامتحان</h3>
+      <div class="checklist-box" id="examday-checklist"></div>
     </section>
  
   </div>
  
+  <!-- ============ MODE FOCUS (Pomodoro plein écran) ============ -->
+  <div class="focus-overlay" id="focus-overlay">
+    <button class="focus-exit" id="focus-exit-btn"><i class="fas fa-compress"></i> <span id="focus-exit-text">خروج</span></button>
+    <div class="focus-phase" id="focus-phase">عمل</div>
+    <div class="focus-time" id="focus-time">25:00</div>
+    <div class="focus-controls">
+      <button class="btn-start" id="focus-start-btn" onclick="togglePomodoro()">ابدأ</button>
+      <button class="btn-reset" id="focus-reset-btn" onclick="resetPomodoro()">إعادة تعيين</button>
+    </div>
+    <div class="focus-sessions"><span id="focus-sessions-label">جلسات مكتملة</span> <span id="focus-sessions-count">0</span></div>
+  </div>
+
   <!-- ============ CHAT WIDGET ============ -->
   <div class="chat-fab" id="chat-fab"><i class="fas fa-comment-dots"></i></div>
   <div class="chat-panel" id="chat-panel">
@@ -899,7 +965,16 @@ const chapterData = {
  
  
 /* Suivi de progression personnel — en memoire (voir note plus bas sur localStorage) */
-const chapterProgress = {};
+/* Suivi de progression personnel — persiste via localStorage sur le site deploye (GitHub Pages, etc).
+   NOTE : ne fonctionne pas dans l'apercu Claude.ai (sandbox), seulement une fois le site en ligne. */
+function loadChapterProgress(){
+  try{ const raw = localStorage.getItem('bac2027_chapterProgress'); return raw ? JSON.parse(raw) : {}; }
+  catch(e){ return {}; }
+}
+function saveChapterProgress(){
+  try{ localStorage.setItem('bac2027_chapterProgress', JSON.stringify(chapterProgress)); }catch(e){}
+}
+let chapterProgress = loadChapterProgress();
  
  
 /* ================= COEFFICIENTS — Décret ministériel du 28 juillet 2026 =================
@@ -1037,7 +1112,7 @@ const i18n = {
     mentions:{passable:"مقبول", ab:"مستحسن", bien:"جيد جدا", tb:"ممتاز", none:"غير متحصل"},
     pomodoroTitle:"⏱️ مؤقت بومودورو", pomodoroWork:"عمل", pomodoroBreak:"استراحة",
     pomodoroStart:"ابدأ", pomodoroPause:"إيقاف مؤقت", pomodoroReset:"إعادة تعيين",
-    pomodoroSessions:"جلسات مكتملة", pomodoroFocusLabel:"وقت التركيز", pomodoroBreakLabel:"وقت الاستراحة",
+    pomodoroSessions:"جلسات مكتملة", pomodoroFocusLabel:"وقت التركيز", pomodoroBreakLabel:"وقت الاستراحة", pomodoroFocusBtn:"وضع التركيز بملء الشاشة", focusExit:"خروج",
     whatToDoTitle:"لا أعرف ماذا أراجع؟", whatToDoBtn:"ماذا يجب أن أفعل؟", whatToDoFiliereLabel:"الشعبة",
     whatToDoRevision:"مراجعة الاكتسابات القبلية", whatToDoFirstChapter:"أول فصل",
     whatToDoEmpty:"لا توجد فصول موثقة بعد لهذه الشعبة، جرّب الرياضيات أو الفيزياء!",
@@ -1048,9 +1123,30 @@ const i18n = {
     planWeeklyTitle:"الجدول الأسبوعي", planPerSubject:"توزيع الساعات حسب المادة",
     planCalendarBlocked:"🏫 غير متاح", planCalendarRest:"☕ استراحة",
     planRestTip:"لا تنسَ أخذ وقت راحة حقيقي (نوم، رياضة، عائلة) خارج هذا الجدول، فهو ضروري للتركيز.",
-    planDownloadPdf:"تحميل الجدول كملف PDF قابل للطباعة", planPdfGenerating:"جارٍ التحضير...", planPdfError:"تعذر إنشاء الملف، تحقق من اتصالك بالإنترنت.",
+    planDownloadPdf:"PDF قابل للطباعة", planDownloadIcs:"إضافة إلى تقويم الهاتف (.ics)", planPdfGenerating:"جارٍ التحضير...", planPdfError:"تعذر إنشاء الملف، تحقق من اتصالك بالإنترنت.",
     dayMon:"الإثنين", dayTue:"الثلاثاء", dayWed:"الأربعاء", dayThu:"الخميس", dayFri:"الجمعة", daySat:"السبت", daySun:"الأحد",
-    guideToolsTitle:"أدوات المراجعة", guideSubjectsTitle:"دليل المواد والقنوات"
+    guideToolsTitle:"أدوات المراجعة", guideSubjectsTitle:"دليل المواد والقنوات",
+    checklistTitle:"✅ قائمة التحقق ليوم الامتحان",
+    orientationTitle:"🎓 التوجيه الجامعي بعد البكالوريا",
+    orientationIntro:"التوجيه الجامعي يعتمد على 4 معايير: شعبتك، معدلك (العام أو المرجح حسب الشعبة)، رغباتك المدونة في استمارة التسجيل، والطاقة الاستيعابية للمؤسسات. العتبات الدنيا لكل تخصص تتغير كل سنة حسب عدد الناجحين والطلب، ولا يتم تحديدها إلا بعد صدور نتائج البكالوريا.",
+    orientationSteps:[
+      "التسجيل الأولي عبر المنصة الرسمية وملء استمارة الرغبات (عادة بين 6 و12 رغبة)",
+      "تأكيد أو تعديل الرغبات خلال المهلة المحددة بعد التسجيل الأولي",
+      "المعالجة الآلية للاستمارات من طرف الوزارة حسب المعدل والرغبات والطاقة الاستيعابية",
+      "الاطلاع على نتيجة التوجيه والتسجيل النهائي إلكترونياً عبر منصة PROGRES"
+    ],
+    orientationLink1:"المنصة الرسمية للتسجيل والتوجيه", orientationLink2:"المساعد الذكي الرسمي للتوجيه",
+    orientationDisclaimer:"⚠️ هذا القسم إعلامي فقط، لا يحسب أي عتبات قبول. تحقق دائماً من المنصة الرسمية أعلاه للمعلومات الدقيقة والمحدثة.",
+    examChecklistItems:{
+      ciCard:"بطاقة التعريف الوطنية أو جواز السفر",
+      convocation:"استدعاء الامتحان الرسمي",
+      pens:"أقلام حبر (احتياطية) وأدوات الكتابة",
+      calculator:"آلة حاسبة مسموح بها (تحقق من النوع المرخص)",
+      ruler:"مسطرة، ممحاة، مبراة",
+      watch:"ساعة يد (الهاتف ممنوع في القاعة)",
+      waterSnack:"قنينة ماء ووجبة خفيفة",
+      goodSleep:"نوم كافٍ الليلة السابقة"
+    }
   },
   fr: {
     dir:"ltr", pageTitle:"Portail Bac 2027 - Compte à rebours et révision",
@@ -1101,7 +1197,7 @@ const i18n = {
     mentions:{passable:"Passable", ab:"Assez Bien", bien:"Bien", tb:"Très Bien", none:"Non obtenu"},
     pomodoroTitle:"⏱️ Minuteur Pomodoro", pomodoroWork:"Travail", pomodoroBreak:"Pause",
     pomodoroStart:"Démarrer", pomodoroPause:"Pause", pomodoroReset:"Réinitialiser",
-    pomodoroSessions:"Sessions complétées", pomodoroFocusLabel:"Durée de concentration", pomodoroBreakLabel:"Durée de pause",
+    pomodoroSessions:"Sessions complétées", pomodoroFocusLabel:"Durée de concentration", pomodoroBreakLabel:"Durée de pause", pomodoroFocusBtn:"Mode focus plein écran", focusExit:"Quitter",
     whatToDoTitle:"Je ne sais pas quoi réviser", whatToDoBtn:"Que dois-je faire ?", whatToDoFiliereLabel:"Filière",
     whatToDoRevision:"Révision des anciennes compétences", whatToDoFirstChapter:"Premier chapitre",
     whatToDoEmpty:"Aucun chapitre encore vérifié pour cette filière, essaie Mathématiques ou Physique !",
@@ -1112,9 +1208,30 @@ const i18n = {
     planWeeklyTitle:"Planning hebdomadaire", planPerSubject:"Répartition des heures par matière",
     planCalendarBlocked:"🏫 Indisponible", planCalendarRest:"☕ Pause",
     planRestTip:"N'oublie pas de garder de vrais moments de repos (sommeil, sport, famille) en dehors de ce planning — c'est essentiel pour rester concentré.",
-    planDownloadPdf:"Télécharger le planning en PDF imprimable", planPdfGenerating:"Préparation en cours...", planPdfError:"Impossible de générer le fichier, vérifie ta connexion internet.",
+    planDownloadPdf:"PDF imprimable", planDownloadIcs:"Ajouter au calendrier du téléphone (.ics)", planPdfGenerating:"Préparation en cours...", planPdfError:"Impossible de générer le fichier, vérifie ta connexion internet.",
     dayMon:"Lundi", dayTue:"Mardi", dayWed:"Mercredi", dayThu:"Jeudi", dayFri:"Vendredi", daySat:"Samedi", daySun:"Dimanche",
-    guideToolsTitle:"Outils de révision", guideSubjectsTitle:"Guide des matières et chaînes"
+    guideToolsTitle:"Outils de révision", guideSubjectsTitle:"Guide des matières et chaînes",
+    checklistTitle:"✅ Checklist du jour de l'examen",
+    orientationTitle:"🎓 Orientation universitaire après le Bac",
+    orientationIntro:"L'orientation universitaire repose sur 4 critères : ta filière, ta moyenne (générale ou pondérée selon la filière), tes vœux inscrits sur le formulaire, et la capacité d'accueil des établissements. Les seuils minimums de chaque filière changent chaque année selon le nombre d'admis et la demande, et ne sont fixés qu'après la publication des résultats du Bac.",
+    orientationSteps:[
+      "Préinscription en ligne sur la plateforme officielle et remplissage de la fiche de vœux (en général 6 à 12 choix)",
+      "Confirmation ou modification des vœux dans le délai imparti après la préinscription",
+      "Traitement automatique des dossiers par le ministère selon la moyenne, les vœux et la capacité d'accueil",
+      "Consultation du résultat d'orientation et inscription finale en ligne via la plateforme PROGRES"
+    ],
+    orientationLink1:"Plateforme officielle d'inscription et d'orientation", orientationLink2:"Assistant intelligent officiel d'orientation",
+    orientationDisclaimer:"⚠️ Cette section est purement informative, elle ne calcule aucun seuil d'admission. Vérifie toujours la plateforme officielle ci-dessus pour des informations exactes et à jour.",
+    examChecklistItems:{
+      ciCard:"Carte d'identité nationale ou passeport",
+      convocation:"Convocation officielle à l'examen",
+      pens:"Stylos à encre (de rechange) et matériel d'écriture",
+      calculator:"Calculatrice autorisée (vérifie le modèle homologué)",
+      ruler:"Règle, gomme, taille-crayon",
+      watch:"Montre (le téléphone est interdit dans la salle)",
+      waterSnack:"Bouteille d'eau et en-cas",
+      goodSleep:"Une nuit de sommeil suffisante la veille"
+    }
   },
   en: {
     dir:"ltr", pageTitle:"Bac 2027 Portal - Countdown and revision",
@@ -1165,7 +1282,7 @@ const i18n = {
     mentions:{passable:"Pass", ab:"Fairly Good", bien:"Good", tb:"Excellent", none:"Not achieved"},
     pomodoroTitle:"⏱️ Pomodoro Timer", pomodoroWork:"Work", pomodoroBreak:"Break",
     pomodoroStart:"Start", pomodoroPause:"Pause", pomodoroReset:"Reset",
-    pomodoroSessions:"Sessions completed", pomodoroFocusLabel:"Focus duration", pomodoroBreakLabel:"Break duration",
+    pomodoroSessions:"Sessions completed", pomodoroFocusLabel:"Focus duration", pomodoroBreakLabel:"Break duration", pomodoroFocusBtn:"Fullscreen focus mode", focusExit:"Exit",
     whatToDoTitle:"Don't know what to revise?", whatToDoBtn:"What should I do?", whatToDoFiliereLabel:"Track",
     whatToDoRevision:"Review of prior skills", whatToDoFirstChapter:"First chapter",
     whatToDoEmpty:"No verified chapters yet for this track, try Mathematics or Physics!",
@@ -1176,9 +1293,30 @@ const i18n = {
     planWeeklyTitle:"Weekly schedule", planPerSubject:"Hours breakdown by subject",
     planCalendarBlocked:"🏫 Unavailable", planCalendarRest:"☕ Break",
     planRestTip:"Don't forget real rest time (sleep, sport, family) outside this schedule — it's essential to stay focused.",
-    planDownloadPdf:"Download printable PDF schedule", planPdfGenerating:"Generating...", planPdfError:"Couldn't generate the file, check your internet connection.",
+    planDownloadPdf:"Printable PDF", planDownloadIcs:"Add to phone calendar (.ics)", planPdfGenerating:"Generating...", planPdfError:"Couldn't generate the file, check your internet connection.",
     dayMon:"Monday", dayTue:"Tuesday", dayWed:"Wednesday", dayThu:"Thursday", dayFri:"Friday", daySat:"Saturday", daySun:"Sunday",
-    guideToolsTitle:"Study Tools", guideSubjectsTitle:"Subject & Channel Guide"
+    guideToolsTitle:"Study Tools", guideSubjectsTitle:"Subject & Channel Guide",
+    checklistTitle:"✅ Exam Day Checklist",
+    orientationTitle:"🎓 University Orientation After the Bac",
+    orientationIntro:"University placement is based on 4 criteria: your track, your average (general or weighted depending on the track), your wishes submitted in the form, and the institutions' intake capacity. The minimum thresholds for each program change every year based on the number of graduates and demand, and are only set after the Bac results are published.",
+    orientationSteps:[
+      "Online pre-registration on the official platform and filling the wishes form (usually 6 to 12 choices)",
+      "Confirming or editing wishes within the deadline after pre-registration",
+      "Automatic processing of applications by the ministry based on average, wishes, and intake capacity",
+      "Checking the placement result and final online registration via the PROGRES platform"
+    ],
+    orientationLink1:"Official registration & orientation platform", orientationLink2:"Official AI orientation assistant",
+    orientationDisclaimer:"⚠️ This section is purely informational and does not calculate any admission thresholds. Always check the official platform above for accurate, up-to-date information.",
+    examChecklistItems:{
+      ciCard:"National ID card or passport",
+      convocation:"Official exam summons",
+      pens:"Ink pens (spares) and writing supplies",
+      calculator:"Approved calculator (check the allowed model)",
+      ruler:"Ruler, eraser, pencil sharpener",
+      watch:"Wristwatch (phones are banned in the exam room)",
+      waterSnack:"Water bottle and a snack",
+      goodSleep:"A good night's sleep beforehand"
+    }
   }
 };
  
@@ -1246,6 +1384,7 @@ function onSectionActivated(target){
   }
   if(target === 'sujets') loadSujets();
   if(target === 'suggestions') loadSuggestions();
+  if(target === 'tableau') renderExamChecklist();
 }
 
 function activateSection(target, { updateHash = true, scroll = true } = {}){
@@ -1800,6 +1939,7 @@ function cycleChapterStatus(key){
   const current = getChapterStatus(key);
   const idx = statusCycle.indexOf(current);
   chapterProgress[key] = statusCycle[(idx + 1) % statusCycle.length];
+  saveChapterProgress();
   renderBiblioTree();
 }
  
@@ -2002,9 +2142,15 @@ document.addEventListener('click', (e)=>{
 ========================================================================= */
  
 /* --- Pomodoro --- */
+function loadPomodoroSessions(){
+  try{ return parseInt(localStorage.getItem('bac2027_pomodoroSessions'), 10) || 0; }catch(e){ return 0; }
+}
+function savePomodoroSessions(){
+  try{ localStorage.setItem('bac2027_pomodoroSessions', String(pomodoroSessionsDone)); }catch(e){}
+}
 let pomodoroWorkMin = 25, pomodoroBreakMin = 5;
 let pomodoroSecondsLeft = pomodoroWorkMin * 60;
-let pomodoroRunning = false, pomodoroInterval = null, pomodoroOnBreak = false, pomodoroSessionsDone = 0;
+let pomodoroRunning = false, pomodoroInterval = null, pomodoroOnBreak = false, pomodoroSessionsDone = loadPomodoroSessions();
  
 function formatPomodoroTime(totalSeconds){
   const m = Math.floor(totalSeconds/60), s = totalSeconds%60;
@@ -2013,15 +2159,35 @@ function formatPomodoroTime(totalSeconds){
 function renderPomodoro(){
   const el = document.getElementById('pomodoro-time');
   if(!el) return;
-  el.textContent = formatPomodoroTime(pomodoroSecondsLeft);
-  document.getElementById('pomodoro-phase').textContent = pomodoroOnBreak ? i18n[currentLang].pomodoroBreak : i18n[currentLang].pomodoroWork;
+  const timeStr = formatPomodoroTime(pomodoroSecondsLeft);
+  const phaseStr = pomodoroOnBreak ? i18n[currentLang].pomodoroBreak : i18n[currentLang].pomodoroWork;
+  const startStr = pomodoroRunning ? i18n[currentLang].pomodoroPause : i18n[currentLang].pomodoroStart;
+  el.textContent = timeStr;
+  document.getElementById('pomodoro-phase').textContent = phaseStr;
   document.getElementById('pomodoro-sessions-count').textContent = pomodoroSessionsDone;
-  document.getElementById('pomodoro-start-btn').textContent = pomodoroRunning ? i18n[currentLang].pomodoroPause : i18n[currentLang].pomodoroStart;
+  document.getElementById('pomodoro-start-btn').textContent = startStr;
+  // Miroir dans l'overlay plein écran, si ouvert
+  const focusTime = document.getElementById('focus-time');
+  if(focusTime){
+    focusTime.textContent = timeStr;
+    document.getElementById('focus-phase').textContent = phaseStr;
+    document.getElementById('focus-sessions-count').textContent = pomodoroSessionsDone;
+    document.getElementById('focus-start-btn').textContent = startStr;
+  }
 }
+function openFocusMode(){
+  document.getElementById('focus-overlay').classList.add('open');
+  if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+}
+function closeFocusMode(){
+  document.getElementById('focus-overlay').classList.remove('open');
+  if(document.exitFullscreen && document.fullscreenElement) document.exitFullscreen().catch(()=>{});
+}
+document.getElementById('focus-exit-btn').addEventListener('click', closeFocusMode);
 function pomodoroTick(){
   pomodoroSecondsLeft--;
   if(pomodoroSecondsLeft <= 0){
-    if(!pomodoroOnBreak){ pomodoroSessionsDone++; pomodoroOnBreak = true; pomodoroSecondsLeft = pomodoroBreakMin*60; }
+    if(!pomodoroOnBreak){ pomodoroSessionsDone++; savePomodoroSessions(); pomodoroOnBreak = true; pomodoroSecondsLeft = pomodoroBreakMin*60; }
     else { pomodoroOnBreak = false; pomodoroSecondsLeft = pomodoroWorkMin*60; }
   }
   renderPomodoro();
@@ -2095,6 +2261,7 @@ function renderWhatToDo(){
 /* --- Générateur de planning intelligent : calendrier hebdomadaire 8h-minuit --- */
 const planDaysOfWeek = ['daySun','dayMon','dayTue','dayWed','dayThu','dayFri','daySat']; // semaine algérienne, dimanche en premier
 const planBusyDayIndices = [0,1,2,3,4]; // dimanche -> jeudi (école / travail)
+let lastPlanSchedule = null; // rempli par generatePlan(), utilisé par exportPlanICS()
  
 function renderPlanForm(){
   const filiereSel = document.getElementById('plan-filiere');
@@ -2169,6 +2336,7 @@ function generatePlan(){
   const rotation = buildPlanRotation(filiereObj, weakKeys);
   const rotRef = { i:0 };
   const subjectTotals = {};
+  lastPlanSchedule = []; // { weekday: 0-6 (0=dimanche, comme Date.getDay()), segments:[{type,name,len,startHour}] }
  
   const dayCols = planDaysOfWeek.map((dKey, idx)=>{
     const isBusyDay = isBusy && planBusyDayIndices.includes(idx);
@@ -2181,7 +2349,10 @@ function generatePlan(){
       availableHours = 7; // 17h -> minuit
     }
     const segments = buildDaySegments(availableHours, rotation, rotRef);
-    segments.forEach(s=>{ if(s.type==='study'){ subjectTotals[s.name] = (subjectTotals[s.name]||0) + s.len; } });
+    let cursor = startHour;
+    const segmentsWithHour = segments.map(s=>{ const withHour = { ...s, startHour: cursor }; cursor += s.len; return withHour; });
+    segmentsWithHour.forEach(s=>{ if(s.type==='study'){ subjectTotals[s.name] = (subjectTotals[s.name]||0) + s.len; } });
+    lastPlanSchedule.push({ weekday: idx, segments: segmentsWithHour });
     return `
       <div class="plan-day-col">
         <div class="plan-day-title">${i18n[currentLang][dKey]}</div>
@@ -2207,9 +2378,14 @@ function generatePlan(){
     <div class="fallback-note" style="font-weight:700;color:var(--text);font-style:normal;margin:1rem 0 .3rem;">${i18n[currentLang].planWeeklyTitle}</div>
     <div class="plan-calendar" id="plan-calendar-capture">${dayCols}</div>
     <div class="plan-tip">💡 ${i18n[currentLang].planRestTip}</div>
-    <button class="plan-pdf-btn" id="plan-pdf-btn" onclick="exportPlanPDF()">
-      <i class="fas fa-file-pdf"></i> <span id="plan-pdf-btn-text">${i18n[currentLang].planDownloadPdf}</span>
-    </button>
+    <div class="plan-export-row">
+      <button class="plan-pdf-btn" id="plan-pdf-btn" onclick="exportPlanPDF()">
+        <i class="fas fa-file-pdf"></i> <span id="plan-pdf-btn-text">${i18n[currentLang].planDownloadPdf}</span>
+      </button>
+      <button class="plan-pdf-btn" id="plan-ics-btn" onclick="exportPlanICS()">
+        <i class="fas fa-calendar-plus"></i> <span id="plan-ics-btn-text">${i18n[currentLang].planDownloadIcs}</span>
+      </button>
+    </div>
     <div class="plan-pdf-status" id="plan-pdf-status"></div>
   `;
 }
@@ -2279,6 +2455,96 @@ async function exportPlanPDF(){
   btn.disabled = false;
 }
  
+/* --- Export du planning en .ics (Google Calendar, Apple Calendar, calendrier du téléphone) ---
+   Evenements hebdomadaires recurrents (RRULE), du prochain jour concerne jusqu'au jour du Bac.
+   Heures locales "flottantes" (sans fuseau horaire) : l'appareil de l'eleve les interprete
+   comme son heure locale, ce qui convient pour un planning de revision quotidien. */
+function icsPad(n){ return String(n).padStart(2,'0'); }
+function icsDateStamp(d){
+  return `${d.getFullYear()}${icsPad(d.getMonth()+1)}${icsPad(d.getDate())}T${icsPad(d.getHours())}${icsPad(d.getMinutes())}00`;
+}
+function nextDateForWeekday(weekday){
+  const d = new Date();
+  const diff = (weekday - d.getDay() + 7) % 7;
+  d.setDate(d.getDate() + diff);
+  return d;
+}
+function exportPlanICS(){
+  if(!lastPlanSchedule){ generatePlan(); }
+  if(!lastPlanSchedule) return;
+  const bac = new Date("2027-06-07T08:00:00");
+  const untilStr = `${bac.getFullYear()}${icsPad(bac.getMonth()+1)}${icsPad(bac.getDate())}T000000`;
+  const now = new Date();
+  let ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Bac2027DZ//Planning//AR\r\nCALSCALE:GREGORIAN\r\n';
+  lastPlanSchedule.forEach(day=>{
+    day.segments.forEach(seg=>{
+      if(seg.type !== 'study') return;
+      const start = nextDateForWeekday(day.weekday);
+      start.setHours(seg.startHour, 0, 0, 0);
+      const end = new Date(start);
+      end.setHours(seg.startHour + seg.len, 0, 0, 0);
+      const uid = `d${day.weekday}h${seg.startHour}-${Math.random().toString(36).slice(2,8)}@bac2027dz`;
+      ics += 'BEGIN:VEVENT\r\n';
+      ics += `UID:${uid}\r\n`;
+      ics += `DTSTAMP:${icsDateStamp(now)}\r\n`;
+      ics += `DTSTART:${icsDateStamp(start)}\r\n`;
+      ics += `DTEND:${icsDateStamp(end)}\r\n`;
+      ics += `RRULE:FREQ=WEEKLY;UNTIL=${untilStr}\r\n`;
+      ics += `SUMMARY:${seg.priority ? '⭐ ' : ''}${seg.name}\r\n`;
+      ics += 'END:VEVENT\r\n';
+    });
+  });
+  ics += 'END:VCALENDAR\r\n';
+  const blob = new Blob([ics], { type:'text/calendar;charset=utf-8' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'planning-bac-2027.ics';
+  link.click();
+}
+ 
+/* =========================================================================
+   CHECKLIST "JOUR DE L'EXAMEN"
+========================================================================= */
+const examDayItemKeys = ['ciCard','convocation','pens','calculator','ruler','watch','waterSnack','goodSleep'];
+function loadExamChecklist(){
+  try{ const raw = localStorage.getItem('bac2027_examChecklist'); return raw ? JSON.parse(raw) : {}; }
+  catch(e){ return {}; }
+}
+function saveExamChecklist(state){
+  try{ localStorage.setItem('bac2027_examChecklist', JSON.stringify(state)); }catch(e){}
+}
+function renderOrientationSteps(){
+  const box = document.getElementById('orientation-steps');
+  if(!box) return;
+  box.innerHTML = i18n[currentLang].orientationSteps.map((text,i)=>`
+    <div class="orientation-step">
+      <div class="os-num">${i+1}</div>
+      <div class="os-text">${text}</div>
+    </div>`).join('');
+}
+ 
+function renderExamChecklist(){
+  const box = document.getElementById('examday-checklist');
+  if(!box) return;
+  const state = loadExamChecklist();
+  const data = i18n[currentLang];
+  box.innerHTML = examDayItemKeys.map(key=>{
+    const checked = !!state[key];
+    return `<label class="checklist-item ${checked?'checked':''}" data-key="${key}">
+      <input type="checkbox" ${checked?'checked':''}>
+      <span>${data.examChecklistItems[key]}</span>
+    </label>`;
+  }).join('');
+  box.querySelectorAll('.checklist-item').forEach(el=>{
+    el.querySelector('input').addEventListener('change', (e)=>{
+      const s = loadExamChecklist();
+      s[el.dataset.key] = e.target.checked;
+      saveExamChecklist(s);
+      el.classList.toggle('checked', e.target.checked);
+    });
+  });
+}
+ 
 function renderGuideTools(){
   document.getElementById('pomodoro-work-input').value = pomodoroWorkMin;
   document.getElementById('pomodoro-break-input').value = pomodoroBreakMin;
@@ -2332,6 +2598,7 @@ function changeLanguage(lang){
  
   document.getElementById("tableau-title").innerText = data.tableauTitle;
   document.getElementById("tableau-empty-text").innerText = data.tableauEmpty;
+  document.getElementById("checklist-title").innerText = data.checklistTitle;
  
   document.getElementById("chat-title").innerText = data.chatTitle;
   document.getElementById("chat-input").placeholder = data.chatPlaceholder;
@@ -2360,6 +2627,10 @@ function changeLanguage(lang){
   document.getElementById("pomodoro-break-label").innerText = data.pomodoroBreakLabel;
   document.getElementById("pomodoro-sessions-label").innerText = data.pomodoroSessions;
   document.getElementById("pomodoro-reset-btn").innerText = data.pomodoroReset;
+  document.getElementById("pomodoro-focus-btn-text").innerText = data.pomodoroFocusBtn;
+  document.getElementById("focus-exit-text").innerText = data.focusExit;
+  document.getElementById("focus-sessions-label").innerText = data.pomodoroSessions;
+  document.getElementById("focus-reset-btn").innerText = data.pomodoroReset;
   document.getElementById("whattodo-title").innerText = data.whatToDoTitle;
   document.getElementById("whattodo-btn-text").innerText = data.whatToDoBtn;
   document.getElementById("whattodo-filiere-label").innerText = data.whatToDoFiliereLabel;
@@ -2370,8 +2641,16 @@ function changeLanguage(lang){
   document.getElementById("plan-mode-fulltime").innerText = data.planModeFulltime;
   document.getElementById("plan-mode-busy").innerText = data.planModeBusy;
   document.getElementById("plan-generate-btn").innerText = data.planGenerate;
+  document.getElementById("orientation-title").innerText = data.orientationTitle;
+  document.getElementById("orientation-intro").innerText = data.orientationIntro;
+  document.getElementById("orientation-link1").innerText = data.orientationLink1;
+  document.getElementById("orientation-link2").innerText = data.orientationLink2;
+  document.getElementById("orientation-disclaimer").innerText = data.orientationDisclaimer;
+  renderOrientationSteps();
   const pdfBtnText = document.getElementById("plan-pdf-btn-text");
   if(pdfBtnText) pdfBtnText.innerText = data.planDownloadPdf;
+  const icsBtnText = document.getElementById("plan-ics-btn-text");
+  if(icsBtnText) icsBtnText.innerText = data.planDownloadIcs;
  
   renderFiliereOptions();
   renderBiblioTree();
@@ -2379,6 +2658,7 @@ function changeLanguage(lang){
   subjectDetail.style.display = 'none';
   subjectGrid.style.display = 'grid';
   renderGuideTools();
+  renderExamChecklist();
   document.getElementById('whattodo-result').innerHTML = '';
   document.getElementById('plan-result').innerHTML = '';
   updateMessages();
