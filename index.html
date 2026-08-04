@@ -15,13 +15,29 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ar_DZ">
+<meta property="og:url" content="https://rayaneyounes107-cyber.github.io/">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" id="twitter-title" content="بوابة بكالوريا 2027 - العد التنازلي والمراجعة">
 <meta name="twitter:description" id="twitter-desc" content="بوابة شاملة لتلاميذ بكالوريا الجزائر 2027: العد التنازلي، دليل المواد، حاسبة المعدل، والجدول الرسمي.">
 <meta name="twitter:image" content="og-image.png">
-<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
+
+<!-- Donnee structuree : indique explicitement a Google le nom du site
+     (methode officielle documentee par Google pour controler le "Site Name"
+     affiche dans les resultats de recherche) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "بكالوريا 2027",
+  "alternateName": "Bac 2027 DZ",
+  "url": "https://rayaneyounes107-cyber.github.io/"
+}
+</script>
+<link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@300;400;500;700&family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css"
       onerror="this.onerror=null; var l=document.createElement('link'); l.rel='stylesheet'; l.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css'; document.head.appendChild(l);">
@@ -617,6 +633,32 @@ footer{ text-align:start; padding-top:1rem; border-top:1px solid var(--border); 
   to{ opacity:1; transform:translateY(0) scale(1); }
 }
 section[data-section].active{ animation:fadeIn .55s var(--ease); }
+
+/* ---------- Lueur qui suit la souris (accueil) ---------- */
+header.hero{ position:relative; overflow:visible; }
+.hero-glow{
+  position:absolute; inset:-120px; z-index:-1; pointer-events:none; opacity:0;
+  background:radial-gradient(280px circle at var(--gx,50%) var(--gy,20%), rgba(44,156,92,.20), transparent 70%);
+  transition:opacity .4s var(--ease);
+}
+
+/* ---------- Focus clavier visible (accessibilite) ---------- */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible{
+  outline:2px solid var(--green); outline-offset:2px; border-radius:4px;
+}
+
+/* ---------- Squelettes de chargement (Sujets / Suggestions) ---------- */
+.skeleton-row{ display:flex; flex-direction:column; gap:.6rem; }
+.skeleton-block{
+  height:52px; border-radius:12px; background:var(--card); border:1px solid var(--border);
+  position:relative; overflow:hidden;
+}
+.skeleton-block::after{
+  content:''; position:absolute; inset:0; transform:translateX(-100%);
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
+  animation:skeletonShimmer 1.5s infinite;
+}
+@keyframes skeletonShimmer{ 100%{ transform:translateX(100%); } }
 </style>
 </head>
 <body>
@@ -647,7 +689,7 @@ section[data-section].active{ animation:fadeIn .55s var(--ease); }
   <nav class="topnav">
     <div class="nav-inner">
       <div class="brand"><i class="fas fa-graduation-cap"></i> <span id="brand-text">بكالوريا 2027</span></div>
-      <button class="nav-toggle" id="nav-toggle"><i class="fas fa-bars"></i></button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="فتح القائمة"><i class="fas fa-bars"></i></button>
       <ul class="nav-links" id="nav-links">
         <li class="nav-pill-wrap"><span class="nav-pill" id="nav-pill"></span></li>
         <li><button class="nav-link active" data-target="home" id="nav-home">الرئيسية</button></li>
@@ -659,10 +701,10 @@ section[data-section].active{ animation:fadeIn .55s var(--ease); }
         <li><button class="nav-link" data-target="suggestions" id="nav-suggestions">اقتراحات</button></li>
         <li><a class="nav-link nav-discord" href="https://discord.gg/tZs4auXv" target="_blank" id="nav-discord"><i class="fab fa-discord"></i> Discord</a></li>
         <li class="nav-search">
-          <input type="text" id="global-search-input" class="nav-search-input" placeholder="بحث..." oninput="runGlobalSearch()" onfocus="runGlobalSearch()">
+          <input type="text" id="global-search-input" class="nav-search-input" placeholder="بحث..." aria-label="بحث في الموقع" oninput="runGlobalSearch()" onfocus="runGlobalSearch()">
           <div class="search-results-dropdown" id="global-search-results"></div>
         </li>
-        <li><button class="theme-toggle" id="theme-toggle" title="تبديل السمة"><i class="fas fa-moon" id="theme-icon"></i></button></li>
+        <li><button class="theme-toggle" id="theme-toggle" title="تبديل السمة" aria-label="تبديل السمة الفاتحة/الداكنة"><i class="fas fa-moon" id="theme-icon"></i></button></li>
         <li>
           <div class="lang-switcher">
             <button class="lang-btn active" onclick="changeLanguage('ar')" id="btn-ar">AR</button>
@@ -679,6 +721,7 @@ section[data-section].active{ animation:fadeIn .55s var(--ease); }
     <!-- ============ ACCUEIL ============ -->
     <section data-section="home" class="active">
       <header class="hero">
+        <div class="hero-glow" id="hero-glow"></div>
         <svg class="flag-badge" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <mask id="crescentMask">
@@ -928,12 +971,12 @@ section[data-section].active{ animation:fadeIn .55s var(--ease); }
   </div>
 
   <!-- ============ CHAT WIDGET ============ -->
-  <div class="chat-fab" id="chat-fab"><i class="fas fa-comment-dots"></i></div>
+  <div class="chat-fab" id="chat-fab" role="button" tabindex="0" aria-label="فتح المساعد الذكي"><i class="fas fa-comment-dots"></i></div>
   <div class="chat-panel" id="chat-panel">
-    <div class="chat-header"><span id="chat-title">المساعد الذكي</span><button id="chat-close">&times;</button></div>
+    <div class="chat-header"><span id="chat-title">المساعد الذكي</span><button id="chat-close" aria-label="إغلاق المحادثة">&times;</button></div>
     <div class="chat-messages" id="chat-messages"></div>
     <div class="chat-suggestions" id="chat-suggestions"></div>
-    <div class="chat-input-row"><input id="chat-input" placeholder="اكتب سؤالك..." /><button id="chat-send"><i class="fas fa-paper-plane"></i></button></div>
+    <div class="chat-input-row"><input id="chat-input" placeholder="اكتب سؤالك..." aria-label="اكتب سؤالك" /><button id="chat-send" aria-label="إرسال"><i class="fas fa-paper-plane"></i></button></div>
   </div>
  
 <script>
@@ -1553,6 +1596,20 @@ function toggleTheme(){
 }
 document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
  
+/* ================= LUEUR SUIVANT LA SOURIS (hero accueil) ================= */
+(function initHeroGlow(){
+  const heroEl = document.querySelector('header.hero');
+  const glowEl = document.getElementById('hero-glow');
+  if(!heroEl || !glowEl) return;
+  heroEl.addEventListener('mousemove', (e)=>{
+    const r = heroEl.getBoundingClientRect();
+    glowEl.style.setProperty('--gx', ((e.clientX-r.left)/r.width*100)+'%');
+    glowEl.style.setProperty('--gy', ((e.clientY-r.top)/r.height*100)+'%');
+    glowEl.style.opacity = '1';
+  });
+  heroEl.addEventListener('mouseleave', ()=>{ glowEl.style.opacity = '0'; });
+})();
+ 
 /* ================= FOND ANIMÉ ================= */
 (function initWaveBackground(){
   const canvas = document.getElementById('bg-canvas');
@@ -1754,6 +1811,26 @@ function monthsDaysDiff(now, target){
   return { months, days, hours, minutes, seconds };
 }
  
+/* Anime les chiffres du compteur de 0 jusqu'a la vraie valeur au premier affichage,
+   puis laisse updateCountdown() prendre le relais toutes les secondes. */
+function animateCountUp(){
+  const target = monthsDaysDiff(new Date(), new Date(targetDate));
+  const duration = 1100;
+  const startTime = performance.now();
+  function tick(now){
+    const t = Math.min((now-startTime)/duration, 1);
+    const eased = 1 - Math.pow(1-t, 3);
+    monthsEl.textContent = Math.round(target.months*eased);
+    daysEl.textContent = Math.round(target.days*eased);
+    hoursEl.textContent = Math.round(target.hours*eased);
+    minutesEl.textContent = Math.round(target.minutes*eased);
+    secondsEl.textContent = Math.round(target.seconds*eased);
+    if(t < 1){ requestAnimationFrame(tick); }
+    else{ updateCountdown(); setInterval(updateCountdown, 1000); }
+  }
+  requestAnimationFrame(tick);
+}
+let lastTitleDays = null;
 function updateCountdown(){
   const now = new Date();
   const diff = targetDate - now.getTime();
@@ -1769,6 +1846,12 @@ function updateCountdown(){
   const progressPercent = Math.min(Math.max((now.getTime()-startDate)/(targetDate-startDate)*100,0),100);
   progressBarEl.style.width=`${progressPercent}%`; progressPercentageEl.textContent=`${progressPercent.toFixed(1)}%`;
   if(d.seconds%15===0) updateMessages();
+  // Titre de l'onglet du navigateur : mis a jour seulement si le nombre de jours change (evite le clignotement)
+  const totalDaysLeft = Math.max(Math.ceil(diff/(1000*3600*24)), 0);
+  if(totalDaysLeft !== lastTitleDays){
+    lastTitleDays = totalDaysLeft;
+    document.title = `${totalDaysLeft} ${data.shareDaysLabel}`;
+  }
 }
  
 /* ================= GUIDE (matières / chaînes) ================= */
@@ -1969,7 +2052,7 @@ function textMatches(csvValue, ...candidates){
 }
  
 async function loadSujets(){
-  sujetsTreeEl.innerHTML = `<p class="loading-text">${i18n[currentLang].loading}</p>`;
+  sujetsTreeEl.innerHTML = `<div class="skeleton-row"><div class="skeleton-block"></div><div class="skeleton-block"></div><div class="skeleton-block"></div></div>`;
   try{
     const res = await fetch(SUJETS_CSV_URL, { cache: "no-store" });
     if(!res.ok) throw new Error('fetch failed');
@@ -2112,7 +2195,7 @@ const filterSuggestionTypeEl = document.getElementById('filter-suggestion-type')
 const suggestionsSearchEl = document.getElementById('suggestions-search');
  
 async function loadSuggestions(){
-  suggestionsListEl.innerHTML = `<p class="loading-text">${i18n[currentLang].loading}</p>`;
+  suggestionsListEl.innerHTML = `<div class="skeleton-row"><div class="skeleton-block"></div><div class="skeleton-block"></div><div class="skeleton-block"></div></div>`;
   try{
     const res = await fetch(SUGGESTIONS_CSV_URL, { cache: "no-store" });
     if(!res.ok) throw new Error('fetch failed');
@@ -2812,6 +2895,7 @@ function changeLanguage(lang){
   document.documentElement.lang = lang;
  
   document.getElementById("page-title").innerText = data.pageTitle;
+  lastTitleDays = null;
   document.getElementById("meta-desc").setAttribute("content", data.pageTitle);
   document.getElementById("brand-text").innerText = data.brand;
   document.getElementById("loader-brand").innerText = data.brand;
@@ -2916,8 +3000,7 @@ function changeLanguage(lang){
 }
  
 changeLanguage('ar');
-setInterval(updateCountdown, 1000);
-updateCountdown();
+animateCountUp();
 updateMessages();
 activateSection(window.location.hash.replace('#',''), { updateHash:false, scroll:false });
  
@@ -2964,7 +3047,27 @@ chatFab.addEventListener('click', ()=>{
   chatPanel.classList.toggle('open');
   if(chatPanel.classList.contains('open')) openChatIfNeeded();
 });
+chatFab.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); chatFab.click(); }
+});
 chatClose.addEventListener('click', ()=>chatPanel.classList.remove('open'));
+ 
+/* ================= RACCOURCIS CLAVIER ================= */
+document.addEventListener('keydown', (e)=>{
+  const tag = (document.activeElement && document.activeElement.tagName) || '';
+  const isTyping = tag === 'INPUT' || tag === 'TEXTAREA' || document.activeElement.isContentEditable;
+  if(e.key === '/' && !isTyping){
+    e.preventDefault();
+    document.getElementById('global-search-input').focus();
+  }
+  if(e.key === 'Escape'){
+    if(chatPanel.classList.contains('open')) chatPanel.classList.remove('open');
+    const focusOverlay = document.getElementById('focus-overlay');
+    if(focusOverlay && focusOverlay.classList.contains('open')) closeFocusMode();
+    document.getElementById('nav-links').classList.remove('open');
+    document.getElementById('global-search-results').classList.remove('open');
+  }
+});
 
 function localFallbackAnswer(text){
   const q=text.toLowerCase().trim(); const lang=currentLang;
